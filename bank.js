@@ -102,8 +102,8 @@ class Bank {
           fromAccount["balance"] -= amount;
           toAccount["balance"] += amount;
           return {
-            fromAccount_Balance: fromAccount["balance"],
-            toAccount_Balance: toAccount["balance"],
+            fromAccount_Balance: fromAccount.balance,
+            toAccount_Balance: toAccount.balance,
           };
         } else {
           return "not suffiencet amount";
