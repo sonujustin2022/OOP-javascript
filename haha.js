@@ -35,14 +35,14 @@ class Bank {
     }
   }
 
-  // 2. deposit(accNo, amount) → increase balance
+  // 2. withdraw(accNo, amount) → increase balance
 
   toWithdraw(accno,amount){
-    let isValid = this.toValidate;
+    let isValid = this.toValidate(accno);
     if(isValid){
         let account = this.accounts[accno];
         
-        if(amount<account['balance']){
+        if(amount<=account['balance']){
             account['balance'] -= amount;
             return account['balance'] ;
 
@@ -51,16 +51,10 @@ class Bank {
         }
 
     }else{
-        return false;
+        return "account not found";
     }
   }
 
-  // 3. withdraw(accNo, amount) → decrease balance (only if sufficient balance)
-
-  // 4. checkBalance(accNo) → display balance
-
-  // 5. fundTransfer(fromAcc, toAcc, amount)
-  //    → transfer money if both accounts exist and balance is sufficient
 }
 
 let BankObj = new Bank();
