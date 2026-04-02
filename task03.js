@@ -33,15 +33,56 @@ class Bank {
     },
   };
 
+
+
+
+
   //   methods
   // Validate account no : (check account no is there)
+
+  toValidate(accNo){
+    if(Object.hasOwn(this.accountDetails,accNo)){
+        return true;
+    }else {
+        return false;
+    }
+
+  }
+
 
 
   // authenticate account only for those with valid account no (acccno, username & password)
 
+
+  toAuthenticate(acccno,userName,password){
+
+    let isValid = this.toValidate(acccno);
+
+    if(isValid){
+        let account = this.accountDetails[acccno];
+        if(userName == account.userName && password == account.password){
+            return true;
+        }else {
+            return false;
+        } 
+
+    }else{
+        return false;
+    }
+
+  }
 
 
   // balance enquiry only for authenticated ones (accno, username & password)
 
 
 }
+
+  let bankObj = new Bank();
+
+  let isValid = bankObj.toValidate(10023);
+
+//   isValid?console.log("validation sucessfull"):console.log("validation not success")
+let isAuthenticated = bankObj.toAuthenticate(1001,"userTwo","password2");
+
+isAuthenticated?console.log("authnicsted"):console.log("not authnitcated")
