@@ -35,27 +35,43 @@ class Bank {
     }
   }
 
-  // 2. deposit(accNo, amount) → increase balance
+   // 3. withdraw(accNo, amount) → decrease balance (only if sufficient balance)
 
   toWithdraw(accno,amount){
-    let isValid = this.toValidate;
+    let isValid = this.toValidate(accno);
     if(isValid){
         let account = this.accounts[accno];
         
-        if(amount<account['balance']){
+        if(amount<=account['balance']){
             account['balance'] -= amount;
-            return account['balance'] ;
+            return `${amount} successfully withdrawed from ${account.name}, balance is ${account['balance']}` ;
 
         }else{
             return "insufficent amount"
         }
 
     }else{
-        return false;
+        return "accout not found";
     }
   }
 
-  // 3. withdraw(accNo, amount) → decrease balance (only if sufficient balance)
+  // 2. deposit(accNo, amount) → increase balance
+  toDeposit(accno,amount){
+    let isValid = this.toValidate(accno)
+    
+    if(isValid){
+        let account = this.accounts[accno];
+        account['balance']+= amount;
+        return `${amount} successfully depoisted to  ${account.name}, balance is ${account['balance']}` ;
+
+    }else{
+        return "Account no found"
+    }
+
+  }
+
+
+  
 
   // 4. checkBalance(accNo) → display balance
 
@@ -69,6 +85,9 @@ let BankObj = new Bank();
 
 // isValid?console.log("acc present"):console.log("not acc is found or presernt")
 
-let withdrawAccount = BankObj.toWithdraw(1001,2000);
+// let withdrawAccount = BankObj.toWithdraw(1004,2000);
 
-console.log(withdrawAccount);
+// console.log(withdrawAccount);
+
+let depoistedAccount = BankObj.toDeposit(1001,2500);
+console.log(depoistedAccount);
