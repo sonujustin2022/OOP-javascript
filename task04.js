@@ -30,11 +30,60 @@ class Library {
   // methods to implement:
   // 1. validateBook(bookId)  → check if book exists
 
-  
+  toValidate(bookId){
+    if(Object.hasOwn(this.bookDetails,bookId)){
+        return true;
+    }else {
+        return false;
+    }
+  }
 
   // 2. borrowBook(bookId) → decrease availableCopies by 1 (if available)
 
+
+  borrowed(bookId){
+    let isValid = this.toValidate;
+    if(isValid){
+
+        if(Object.hasOwn(this.bookDetails,bookId)){
+            let book = this.bookDetails[bookId];
+            return book.availableCopies -= 1;
+        }
+    }else{
+        return false;
+    }
+
+  }
+
   // 3. returnBook(bookId) → increase availableCopies by 1
+
+
+  returned(bookId){
+    let isValid = this.toValidate;
+    if(isValid){
+
+        if(Object.hasOwn(this.bookDetails,bookId)){
+            let book = this.bookDetails[bookId];
+            return book.availableCopies += 1;
+        }
+    }else{
+        return false;
+    }
+
+  }
+
 
   // 4. checkAvailability(bookId) → display available copies
 }
+
+let LibraryObj = new Library();
+
+// let isValid = LibraryObj.toValidate(104);
+
+// isValid?console.log("this book is present"):console.log("not present")
+
+// let borrowedBook = LibraryObj.borrowed(104);
+// console.log(borrowedBook," copies available");
+
+let returnedBook = LibraryObj.returned(104);
+console.log(returnedBook," copies available");
