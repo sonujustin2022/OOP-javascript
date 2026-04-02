@@ -27,56 +27,91 @@ class Bank {
 
   // 1. validateAccount(accNo) → check if account exists
 
-  toValidate(acccno){
-    if(Object.hasOwn(this.accounts,acccno)){
-        return true;
-    }else {
-        return false;
+  toValidate(acccno) {
+    if (Object.hasOwn(this.accounts, acccno)) {
+      return true;
+    } else {
+      return false;
     }
   }
 
-   // 3. withdraw(accNo, amount) → decrease balance (only if sufficient balance)
+  // 3. withdraw(accNo, amount) → decrease balance (only if sufficient balance)
 
-  toWithdraw(accno,amount){
+  toWithdraw(accno, amount) {
     let isValid = this.toValidate(accno);
-    if(isValid){
-        let account = this.accounts[accno];
-        
-        if(amount<=account['balance']){
-            account['balance'] -= amount;
-            return `${amount} successfully withdrawed from ${account.name}, balance is ${account['balance']}` ;
+    if (isValid) {
+      let account = this.accounts[accno];
 
-        }else{
-            return "insufficent amount"
-        }
-
-    }else{
-        return "accout not found";
+      if (amount <= account["balance"]) {
+        account["balance"] -= amount;
+        return `${amount} successfully withdrawed from ${account.name}, balance is ${account["balance"]}`;
+      } else {
+        return "insufficent amount";
+      }
+    } else {
+      return "accout not found";
     }
   }
 
   // 2. deposit(accNo, amount) → increase balance
-  toDeposit(accno,amount){
-    let isValid = this.toValidate(accno)
-    
-    if(isValid){
-        let account = this.accounts[accno];
-        account['balance']+= amount;
-        return `${amount} successfully depoisted to  ${account.name}, balance is ${account['balance']}` ;
+  toDeposit(accno, amount) {
+    let isValid = this.toValidate(accno);
 
-    }else{
-        return "Account no found"
+    if (isValid) {
+      let account = this.accounts[accno];
+      account["balance"] += amount;
+      return `${amount} successfully depoisted to  ${account.name}, balance is ${account["balance"]}`;
+    } else {
+      return "Account no found";
     }
-
   }
-
-
-  
 
   // 4. checkBalance(accNo) → display balance
 
+  checkBalance(accno) {
+    if (this.toValidate(accno)) {
+      let account = this.accounts[accno];
+      return account["balance"];
+    } else {
+      return "account not found";
+    }
+  }
+
   // 5. fundTransfer(fromAcc, toAcc, amount)
   //    → transfer money if both accounts exist and balance is sufficient
+
+  fundTransfer(fromAcc, toAcc, amount) {
+
+  if(fromAcc === toAcc){
+    return "cannot transfer to same account"
+  } 
+
+  if(amount<=0){
+    return "inValid Amount"
+  }
+
+
+  let isValidFromAcc = this.toValidate(fromAcc);
+      let isValidToAcc = this.toValidate(toAcc);
+
+      if (isValidFromAcc && isValidToAcc) {
+        let fromAccount = this.accounts[fromAcc];
+        let toAccount = this.accounts[toAcc];
+
+        if (amount <= fromAccount["balance"]) {
+          fromAccount["balance"] -= amount;
+          toAccount["balance"] += amount;
+          return {
+            fromAccount_Balance: fromAccount["balance"],
+            toAccount_Balance: toAccount["balance"],
+          };
+        } else {
+          return "not suffiencet amount";
+        }
+      } else {
+        return "wrong account / account not found";
+      }
+  }
 }
 
 let BankObj = new Bank();
@@ -89,5 +124,10 @@ let BankObj = new Bank();
 
 // console.log(withdrawAccount);
 
-let depoistedAccount = BankObj.toDeposit(1001,2500);
-console.log(depoistedAccount);
+// let depoistedAccount = BankObj.toDeposit(1001,2500);
+// // console.log(depoistedAccount);
+
+// let checkBalanceAcc = BankObj.checkBalance(1001);
+// console.log(checkBalanceAcc);
+
+console.log(BankObj.fundTransfer(1001, 1001, -1000));
