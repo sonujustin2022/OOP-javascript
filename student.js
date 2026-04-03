@@ -39,6 +39,25 @@ class StudentSystem {
   // 3. getAverage(id)
   // → return average marks
 
+  getAverage(stdId){
+
+    if(this.toValidate(stdId)){
+      
+      let student = this.students[stdId];
+      if(student['marks'].length === 0){
+        return "no mark available"
+      }
+      
+      let total = student['marks'].reduce((accu,curr)=>accu+curr,0);
+      
+      return total/student['marks'].length;
+
+    }else {
+      return "student not found"
+    }
+
+  }
+
   // 4. getGrade(id)
   // → return grade based on average
   //    (90+ → A, 75+ → B, 60+ → C, else D)
@@ -55,8 +74,9 @@ let studentObj = new StudentSystem();
 // let isValid = studentObj.toValidate(4 );
 // isValid?console.log("student is present"):console.log("not present");
 
-let addMark = studentObj.addMark(1,-111);
-console.log(addMark);
+// let addMark = studentObj.addMark(1,-111);
+// console.log(addMark);
 
-
+let averageMarks = studentObj.getAverage(1);
+console.log(averageMarks);
 
