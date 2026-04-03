@@ -108,6 +108,30 @@ class StudentSystem {
   
 
   // 6. getFailedStudents()
+
+getFailed(){
+
+  let studentsArr = Object.values(this.students);
+
+
+  
+  let failedStudents = [];
+
+  for(let student of studentsArr){
+
+    let avg = Number(this.getAverage(student.id));
+
+    if(avg<60 && !isNaN(avg)){
+      failedStudents.push(student);
+    }
+
+  }
+
+  return failedStudents.length>0?failedStudents:"no failed students";
+
+
+}
+
   // → return students with average < 60
 }
 
@@ -125,6 +149,8 @@ let studentObj = new StudentSystem();
 // let getGrade = studentObj.getgrade(1);
 // console.log(getGrade);
 
-let getTopper = studentObj.getTopper();
+// let getTopper = studentObj.getTopper();
+// console.log(getTopper);
 
-console.log(getTopper);
+let failedStd = studentObj.getFailed();
+console.log(failedStd);
