@@ -12,6 +12,10 @@ class StudentSystem {
   // 1. validateStudent(id)
   // → check if student exists
 
+  toValidate(stdId){
+    return Object.hasOwn(this.students,stdId);
+  }
+
   // 2. addMarks(id, newMark)
   // → add a new mark to student's marks array
 
@@ -28,3 +32,8 @@ class StudentSystem {
   // 6. getFailedStudents()
   // → return students with average < 60
 }
+
+let studentObj = new StudentSystem();
+
+let isValid = studentObj.toValidate(4 );
+isValid?console.log("student is present"):console.log("not present");
