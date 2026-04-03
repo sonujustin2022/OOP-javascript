@@ -18,6 +18,23 @@ class StudentSystem {
 
   // 2. addMarks(id, newMark)
   // → add a new mark to student's marks array
+  addMark(stdId,newMark){
+
+    if(typeof newMark !== "number" || newMark<0 || newMark>100){
+      return "invalid entry";
+    }
+
+    if(this.toValidate(stdId)){
+      let student = this.students[stdId];
+      student['marks'].push(newMark);
+      return this.students[stdId];
+
+    }else{
+      return "Student not Found"
+    }
+  }
+
+
 
   // 3. getAverage(id)
   // → return average marks
@@ -35,5 +52,11 @@ class StudentSystem {
 
 let studentObj = new StudentSystem();
 
-let isValid = studentObj.toValidate(4 );
-isValid?console.log("student is present"):console.log("not present");
+// let isValid = studentObj.toValidate(4 );
+// isValid?console.log("student is present"):console.log("not present");
+
+let addMark = studentObj.addMark(1,-111);
+console.log(addMark);
+
+
+
