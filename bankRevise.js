@@ -27,60 +27,58 @@ class Bank {
 
   // 1. validateAccount(accNo) → check if account exists
 
-toValidate(accNo){
-    return Object.hasOwn(this.accounts,accNo);
-
-}
-
+  toValidate(accNo) {
+    return Object.hasOwn(this.accounts, accNo);
+  }
 
   // 2. deposit(accNo, amount) → increase balance
 
+  toDeposit(accNo, amount) {
+    if (this.toValidate(accNo)) {
+      if (isNaN(amount) || amount <= 0) {
+        return "not valid amount";
+      }
 
-toDeposit(accNo,amount){
+      let account = this.accounts[accNo];
 
-    if(this.toValidate(accNo)){
-        if(isNaN(amount) || amount<=0){
-            return "not valid amount"
-        }
-
-        let account = this.accounts[accNo];
-
-        account.balance += amount;
-        return account.balance;
-
-    }else {
-        return "account not found"
+      account.balance += amount;
+      return account.balance;
+    } else {
+      return "account not found";
     }
-
-}  
+  }
 
   // 3. withdraw(accNo, amount) → decrease balance (only if sufficient balance)
 
-
-  toWithdraw(accNo,amount){
-
-    if(!this.toValidate(accNo)){
-        return "account not found"
+  toWithdraw(accNo, amount) {
+    if (!this.toValidate(accNo)) {
+      return "account not found";
     }
 
-    if(isNaN(amount)|| amount<=0){
-        return "invalid number"
+    if (isNaN(amount) || amount <= 0) {
+      return "invalid number";
     }
 
     let account = this.accounts[accNo];
 
-    if(amount<=account.balance){
-        account['balance'] -= amount;
-        return account.balance;
-
-    }else{
-        return "insufficent amount"
+    if (amount <= account.balance) {
+      account["balance"] -= amount;
+      return account.balance;
+    } else {
+      return "insufficent amount";
     }
-
   }
 
-
   // 4. checkBalance(accNo) → display balance
+
+  checkBalance(accNo){
+    if(!this.toValidate(accNo)){
+        return "no Account Found"
+    }
+
+    let account = this.accounts[accNo];
+    return account.balance;
+  }
 
   // 5. fundTransfer(fromAcc, toAcc, amount)
   //    → transfer money if both accounts exist and balance is sufficient
@@ -95,5 +93,8 @@ let bankOb = new Bank();
 // let toDeposit = bankOb.toDeposit(1004,3000);
 // console.log(toDeposit);
 
-let toWithDraw = bankOb.toWithdraw(1004,5000);
-console.log(toWithDraw);
+// let toWithDraw = bankOb.toWithdraw(1004, 5000);
+// console.log(toWithDraw);
+
+let balance = bankOb.checkBalance(1004);
+console.log(balance);
