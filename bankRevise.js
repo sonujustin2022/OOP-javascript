@@ -82,6 +82,38 @@ class Bank {
 
   // 5. fundTransfer(fromAcc, toAcc, amount)
   //    → transfer money if both accounts exist and balance is sufficient
+
+  toFundTransfer(fromAcc,toAcc,amount){
+    if(this.toValidate(fromAcc) && this.toValidate(toAcc)){
+
+      if(amount<=0 || isNaN(amount)){
+        return "invalid Amount"
+      }
+
+      
+     
+    }else {
+       return "account not found";
+    }
+
+
+    let fromAccount = this.accounts[fromAcc];
+    let toAccount = this.accounts[toAcc];
+
+    if(amount<= fromAccount.balance){
+      fromAccount.balance -= amount;
+      toAccount.balance += amount;
+
+      return `amount succesffully trasnfered ${amount} from ${fromAccount.name} to ${toAccount.name}`
+
+    }else{
+      return "inSufficent amount"
+    }
+
+
+  }
+
+
 }
 
 let bankOb = new Bank();
@@ -96,5 +128,9 @@ let bankOb = new Bank();
 // let toWithDraw = bankOb.toWithdraw(1004, 5000);
 // console.log(toWithDraw);
 
-let balance = bankOb.checkBalance(1004);
-console.log(balance);
+// let balance = bankOb.checkBalance(1001);
+// console.log(balance);
+
+let fundTransfer = bankOb.toFundTransfer(1004,1001,2500);
+console.log(fundTransfer);
+
