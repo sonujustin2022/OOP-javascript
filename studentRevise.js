@@ -1,7 +1,7 @@
 class StudentSystem {
   // property
   students = {
-    1: { id: 1, name: "Sonu", marks: [18,15,10] },
+    1: { id: 1, name: "Sonu", marks: [45,56,89] },
     2: { id: 2, name: "Rahul", marks: [60, 70, 65] },
     3: { id: 3, name: "Anu", marks: [90, 88, 95] },
     4: { id: 4, name: "Meera", marks: [50, 55, 60] },
@@ -43,6 +43,12 @@ toAddMark(stdId,newMark){
   toGetAverage(stdId){
     if(this.toValidate(stdId)){
         let student = this.students[stdId];
+        
+        if(student.marks.length  == 0){
+            return "no marks available"
+
+        }
+
         let total = student.marks.reduce((accu,curr)=>accu+curr,0)
       let avg = total/student.marks.length;
       return avg;
