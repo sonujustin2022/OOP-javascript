@@ -38,6 +38,19 @@ toAddMark(stdId,newMark){
 }
 
   // 3. getAverage(id)
+
+
+  toGetAverage(stdId){
+    if(this.toValidate(stdId)){
+        let student = this.students[stdId];
+        let total = student.marks.reduce((accu,curr)=>accu+curr,0)
+      let avg = total/student.marks.length;
+      return avg;
+
+    }else {
+        return "no student found"
+    }
+  }
  
   // 4. getGrade(id)
   // → return grade based on average
@@ -58,5 +71,8 @@ let studentObj = new StudentSystem();
 // let toValidate = studentObj.tovalidate(5);
 // toValidate?console.log("student found"):console.log("no student found")
 
-let toAddMark = studentObj.toAddMark(4,101);
-console.log(toAddMark);
+// let toAddMark = studentObj.toAddMark(4,101);
+// console.log(toAddMark);
+
+let average = studentObj.toGetAverage(1);
+console.log(average)
