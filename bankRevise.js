@@ -84,20 +84,18 @@ class Bank {
   //    → transfer money if both accounts exist and balance is sufficient
 
   toFundTransfer(fromAcc,toAcc,amount){
-    if(this.toValidate(fromAcc) && this.toValidate(toAcc)){
 
-      if(amount<=0 || isNaN(amount)){
-        return "invalid Amount"
-      }
-
-      
-     
-    }else {
-       return "account not found";
+    if(fromAcc === toAcc){
+      return "cannot tranfer to same acc"
     }
 
 
-    let fromAccount = this.accounts[fromAcc];
+     if(amount<=0 || isNaN(amount)){
+        return "invalid Amount"
+      }
+
+    if(this.toValidate(fromAcc) && this.toValidate(toAcc)){
+      let fromAccount = this.accounts[fromAcc];
     let toAccount = this.accounts[toAcc];
 
     if(amount<= fromAccount.balance){
@@ -109,7 +107,10 @@ class Bank {
     }else{
       return "inSufficent amount"
     }
-
+     
+    }else {
+       return "account not found";
+    }
 
   }
 
