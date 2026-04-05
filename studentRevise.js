@@ -2,9 +2,10 @@ class StudentSystem {
   // property
   students = {
     1: { id: 1, name: "Sonu", marks: [45,56,89] },
-    2: { id: 2, name: "Rahul", marks: [60, 70, 65] },
-    3: { id: 3, name: "Anu", marks: [90, 88, 95] },
-    4: { id: 4, name: "Meera", marks: [50, 55, 60] },
+    2: { id: 2, name: "Rahul", marks:  [23, 15, 30] },
+    3: { id: 3, name: "Anu", marks: [92, 95, 89]},
+    4: { id: 4, name: "Meera", marks: [60, 70, 65]  },
+    5: { id: 5, name: "Ram", marks: [80, 95, 60] }
   };
 
 
@@ -86,8 +87,44 @@ toAddMark(stdId,newMark){
   // 5. getTopper()
   // → return student with highest average
 
+  getTopper(){
+    
+
+        let studentsArr = Object.values(this.students);
+        let highestAvg = 0;
+        let topper = null;
+
+        for(let student of studentsArr){
+            let average = this.toGetAverage(student.id)
+            if(average>highestAvg ){
+                highestAvg = average;
+                topper = student;
+            }
+
+        }
+
+        return topper?topper:"topper not found"
+
+  
+  }
+
   // 6. getFailedStudents()
   // → return students with average < 60
+
+getFailed(){
+    let studentsArr = Object.values(this.students);
+    let failedStuds = [];
+    for(let student of studentsArr){
+        let average = this.toGetAverage(student.id);
+
+        if(average<60){
+            failedStuds.push(student);
+        }
+       
+    }
+     return failedStuds;
+}
+
 }
 
 
@@ -102,5 +139,11 @@ let studentObj = new StudentSystem();
 // let average = studentObj.toGetAverage(1);
 // console.log(average);
 
-let grade = studentObj.getGrade(3);
-console.log(grade);
+// let grade = studentObj.getGrade(3);
+// console.log(grade);
+
+// let topper = studentObj.getTopper();
+// console.log(topper);
+
+let failed = studentObj.getFailed();
+console.log(failed);
