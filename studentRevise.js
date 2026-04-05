@@ -62,6 +62,25 @@ toAddMark(stdId,newMark){
   // → return grade based on average
   //    (90+ → A, 75+ → B, 60+ → C, else D)
 
+  getGrade(stdId){
+    if(this.toValidate(stdId)){
+        let average = this.toGetAverage(stdId);
+
+        if(average>=90){
+            return "A Grade"
+        } else if (average>=75){
+            return "B Grade"
+        } else if (average >= 60){
+            return "C Grade"
+        } else {
+            return "D Grade"
+        }
+
+    }else{
+        return "student not found"
+    }
+  }
+
 
 
   // 5. getTopper()
@@ -80,5 +99,8 @@ let studentObj = new StudentSystem();
 // let toAddMark = studentObj.toAddMark(4,101);
 // console.log(toAddMark);
 
-let average = studentObj.toGetAverage(1);
-console.log(average)
+// let average = studentObj.toGetAverage(1);
+// console.log(average);
+
+let grade = studentObj.getGrade(3);
+console.log(grade);
